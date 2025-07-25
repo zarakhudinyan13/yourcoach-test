@@ -1,0 +1,24 @@
+# Node modules
+node_modules/
+
+# Playwright browser binaries (optional but recommended)
+.playwright/
+
+# VS Code settings
+.vscode/
+
+# Logs
+*.log
+
+# Test output
+test-results/
+*.zip
+*.png
+
+# Env and local settings
+.env
+*.local
+
+# Mac & OS noise
+.DS_Store
+Thumbs.db
