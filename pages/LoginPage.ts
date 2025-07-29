@@ -1,22 +1,24 @@
-// pages/LoginPage.ts
-import { Page, Locator } from '@playwright/test';
+import { Page, expect } from '@playwright/test';
+import { LoginLocators } from '../Locators/LoginLocators';
 
 export class LoginPage {
-  readonly page: Page;
-  readonly emailInput: Locator;
-  readonly passwordInput: Locator;
-  readonly loginBtn: Locator;
+  constructor(private page: Page) {}
 
-  constructor(page: Page) {
-    this.page = page;
-    this.emailInput = page.getByPlaceholder('Email');
-    this.passwordInput = page.getByPlaceholder('Password');
-    this.loginBtn = page.getByRole('button', { name: /login/i });
+  async startLogin() {
+    await this.page.locator(LoginLocators.signInButton).click();
+    await this.page.waitForTimeout(5000)
+    await expect(this.page.locator(LoginLocators.welcomeMessage)).toBeVisible();
+    await expect(this.page.locator(LoginLocators.emailLabel)).toBeVisible();
+    await expect(this.page.locator(LoginLocators.helperText)).toBeVisible();
   }
 
-  async login(email: string, password: string) {
-    await this.emailInput.fill(email);
-    await this.passwordInput.fill(password);
-    await this.loginBtn.click();
+  async loginWithCode(email: string, code: string) {
+    await this.page.locator(LoginLocators.emailInput).fill(email);
+    await this.page.locator(LoginLocators.sendCodeButton).click();
+    const codeInput = this.page.locator('[data-test-id="auth.input.code"] input');
+    await expect(codeInput).toBeVisible();
+
+    await codeInput.fill(code);
+   // await this.page.locator(LoginLocators.submitBtn).click();
   }
 }
