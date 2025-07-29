@@ -12,7 +12,8 @@ export const PracticeLocators = {
 
   // Upload cover
   uploadCoverButton: '[data-test-id="edit_coach_profile.button.add_cover"]',
-  coverFileInput: '[data-test-id="addFile.input.file"]:visible >> nth=1',    
-  confirmUploadButton: '[data-test-id="addFile.button.confirm"]'
+  coverFileInput:  'input[type="file"][data-test-id="addFile.input.file"]',    
+  confirmUploadButton: '[data-test-id="addFile.button.confirm"]',
+  closeModalButton :   '[data-test-id="modal.button.close"]'
   
 };
